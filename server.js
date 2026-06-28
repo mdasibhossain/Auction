@@ -16,7 +16,7 @@ const uploadsPath = path.join(projectRoot, "uploads");
 // connect Database
 const connectDB = async () => {
   console.log("Environment check:", process.env.MONGODB_URI);
-const mongoUri = process.env.MONGO_URI;
+const mongoUri = process.env.MONGODB_URI;
 
     if (!mongoUri) {
         console.warn("MONGODB_URI not set. Skipping database connection.");
