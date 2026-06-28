@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Total Players</title>
+    <style>
+        body {
+            background-color: #0f172a;
+            color: white;
+            font-family: sans-serif;
+            padding: 30px;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background: #1e293b;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            color: #38bdf8;
+            border-bottom: 2px solid #334155;
+            padding-bottom: 10px;
+            margin-top: 0;
+        }
+
+        /* Filter Form Style */
+        .filter-form {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 20px;
+            background: #0f172a;
+            padding: 15px;
+            border-radius: 6px;
+            align-items: center;
+        }
+
+        .filter-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        select,
+        button {
+            padding: 10px 15px;
+            border-radius: 4px;
+            border: 1px solid #334155;
+            background: #1e293b;
+            color: white;
+            outline: none;
+        }
+
+        button {
+            background: #3b82f6;
+            cursor: pointer;
+            font-weight: bold;
+            border: none;
+            padding: 10px 25px;
+        }
+
+        button:hover {
+            background: #2563eb;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        th,
+        td {
+            padding: 12px;
+            border: 1px solid #334155;
+            text-align: left;
+        }
+
+        th {
+            background-color: #0f172a;
+            color: #38bdf8;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 15px;
+            color: #94a3b8;
+            text-decoration: none;
+        }
+
+        .back-link:hover {
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <a href="/dashboard" class="back-link">← Back to Dashboard</a>
+        <h1>⚽ Total Registered Players</h1>
+
+        <form action=" " method="GET" class="filter-form">
+
+            <div class="filter-group">
+                <label>Position:</label>
+                <select name="position">
+                    <option value="">All Positions</option>
+                    <option value="LWF (Left Wing Forward)">LWF (Left Wing Forward)</option>
+                    <option value="RWF (Right Wing Forward)">RWF (Right Wing Forward)</option>
+                    <option value="CF (Center Forward)">CF (Center Forward)</option>
+                    <option value="SS (Second Striker)">SS (Second Striker)</option>
+                    <option value="AMF (Attacking Midfielder)">AMF (Attacking Midfielder)</option>
+                    <option value="LMF (Left Midfielder)">LMF (Left Midfielder)</option>
+                    <option value="RMF (Right Midfielder)">RMF (Right Midfielder)</option>
+                    <option value="CMF (Central Midfielder)">CMF (Central Midfielder)</option>
+                    <option value="DMF (Defensive Midfielder)">DMF (Defensive Midfielder)</option>
+                    <option value="CB (Center Back)">CB (Center Back)</option>
+                    <option value="RB (Right Back)">RB (Right Back)</option>
+                    <option value="LB (Left Back)">LB (Left Back)</option>
+                    <option value="GK (Goalkeeper)">GK (Goalkeeper)</option>
+
+
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <label>Category:</label>
+                <select name="category">
+                    <option value="">All Categories</option>
+                    <option value="Team-Owner">Team-Owner</option>
+                    <option value="Epic">Epic</option>
+                    <option value="Icon">Icon</option>
+                    <option value="Grade-A">Grade-A</option>
+                    <option value="Grade-B">Grade-B</option>
+                    <option value="Grade-C">Grade-C</option>
+                </select>
+            </div>
+
+            <button type="submit">Apply Filter</button>
+        </form>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Batch</th>
+                    <th>Position</th>
+                    <th>Category</th>
+                    <th>Phone Number</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{TABLE_BODY}}
+            </tbody>
+        </table>
+    </div>
+
+</body>
+
+</html>

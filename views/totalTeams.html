@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tournament Teams</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; background-color: #0b1120; color: #e2e8f0; margin: 0; padding: 30px; }
+        .nav-link { color: #38bdf8; text-decoration: none; display: inline-block; margin-bottom: 20px; }
+        h1 { color: #38bdf8; margin-bottom: 25px; }
+        
+        .input-section { background: #1e293b; padding: 25px; border-radius: 12px; margin-bottom: 40px; border: 1px solid #334155; }
+        
+        /* টেবিল কন্টেইনার */
+        .team-container { background: #1e293b; padding: 25px; border-radius: 12px; margin-bottom: 30px; border: 1px solid #334155; }
+        .team-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
+        
+        table { width: 100%; border-collapse: collapse; background: #0f172a; border-radius: 8px; overflow: hidden; }
+        th { text-align: left; padding: 15px; color: #38bdf8; border-bottom: 1px solid #334155; }
+        td { padding: 15px; border-bottom: 1px solid #334155; }
+        
+        .delete-btn { background: #991b1b; color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <a href="/dashboard" class="nav-link">← Back to Dashboard</a>
+    <h1>Tournament Teams</h1>
+
+    <div class="input-section">
+        <form action="/setup-tournament" method="POST">
+            <input type="text" name="teamNames" placeholder="Enter Team Name" style="padding: 12px; width: 300px; border-radius: 6px;" required>
+            <button type="submit" style="padding: 12px 20px; background: #3b82f6; color: white; border: none; border-radius: 6px; cursor: pointer;">Add Team</button>
+        </form>
+    </div>
+
+    <h1>Tournament Teams Overview</h1>
+    <div id="teams-list">
+        {{TEAM_DATA_ROWS}}
+    </div>
+</body>
+</html>

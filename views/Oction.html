@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Futsal Registration Form</title>
+
+    <!-- Google Font (Inter) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap 5.3.2 CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+    <style>
+        body {
+            margin: 0;
+            padding: 40px 20px;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #060b13 0%, #0a1120 50%, #020408 100%) !important;
+            color: #ffffff;
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* --- HEADER STYLING --- */
+        .top-container {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .log img {
+            max-width: 110px;
+            height: auto;
+            filter: drop-shadow(0 0 15px rgba(59, 130, 246, 0.2));
+            margin-bottom: 15px;
+        }
+
+        .Futsal {
+            font-size: 2.2rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            background: linear-gradient(45deg, #ffffff, #a2c2f7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .sub-hed {
+            color: #64748b;
+            font-size: 1rem;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        hr {
+            border-color: rgba(255, 255, 255, 0.05);
+            margin: 25px 0;
+        }
+
+        /* --- PREMIUM FORM CARD --- */
+        .file {
+            max-width: 650px;
+            background: rgba(10, 17, 32, 0.7) !important;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            margin: 0 auto 40px auto;
+            padding: 40px;
+            border-radius: 24px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4), 
+                        0 0 40px rgba(59, 130, 246, 0.03);
+        }
+
+        /* --- INPUTS & SELECTS STYLING --- */
+        .form-label {
+            color: #94a3b8;
+            font-weight: 500;
+            font-size: 0.95rem;
+            margin-bottom: 8px;
+        }
+
+        .form-control, select {
+            width: 100% !important;
+            max-width: 100% !important;
+            background-color: rgba(15, 23, 42, 0.6) !important;
+            border: 1px solid rgba(255, 255, 255, 0.2) !important; /* স্পষ্ট বর্ডার আউটলাইন */
+            color: #ffffff !important; /* টাইপ করা টেক্সটের কালার একদম সাদা */
+            border-radius: 12px !important;
+            padding: 12px 16px !important;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: all 0.3s ease !important;
+        }
+
+        .form-control::placeholder {
+            color: #94a3b8 !important; 
+            opacity: 1 !important; 
+        }
+
+       
+        .form-control:focus, select:focus {
+            border-color: #3b82f6 !important;
+            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.25) !important;
+            outline: none;
+        }
+
+    
+        select option {
+            background-color: #0f172a;
+            color: #ffffff;
+        }
+
+        input[type="file"] {
+            color: #94a3b8 !important;
+        }
+
+        input[type="file"]::file-selector-button {
+            background: #1e293b;
+            color: #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 6px 12px;
+            margin-right: 10px;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+
+        input[type="file"]::file-selector-button:hover {
+            background: #334155;
+        }
+
+        /* --- CUSTOM RADIO BUTTONS (PAYMENT) --- */
+        .payment-section {
+            background: rgba(15, 23, 42, 0.4);
+            padding: 20px;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+        }
+
+        .payment-options {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+            margin-top: 12px;
+        }
+
+        .radio-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+            background: rgba(30, 41, 59, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 14px 16px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .radio-wrapper:hover {
+            background: rgba(30, 41, 59, 0.7);
+            border-color: rgba(59, 130, 246, 0.3);
+        }
+
+        .radio-wrapper input[type="radio"] {
+            margin-right: 12px;
+            width: 18px;
+            height: 18px;
+            accent-color: #3b82f6;
+            cursor: pointer;
+        }
+
+        .radio-wrapper label {
+            cursor: pointer;
+            color: #e2e8f0;
+            font-weight: 500;
+            font-size: 0.95rem;
+            width: 100%;
+        }
+
+        /* --- SUBMIT BUTTON --- */
+        .btn-submit {
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            color: white;
+            border: none;
+            width: 100%;
+            padding: 14px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 1rem;
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .btn-submit:hover {
+            background: linear-gradient(135deg, #2563eb, #1e40af);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
+        }
+
+        /* --- FOOTER --- */
+        .botom {
+            text-align: center;
+            color: #475569;
+            font-size: 0.85rem;
+            margin-top: 20px;
+        }
+
+        /* --- RESPONSIVE DESIGN --- */
+        @media screen and (max-width: 768px) {
+            body {
+                padding: 20px 10px;
+            }
+
+            .file {
+                padding: 25px 20px;
+                border-radius: 20px;
+            }
+
+            .Futsal {
+                font-size: 1.8rem;
+            }
+
+            .sub-hed {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="top-container">
+        <div class="log">
+            <img src="DU-logo-removebg-preview.png" alt="Logo" onerror="this.src='https://via.placeholder.com/110'">
+        </div>
+        <div class="hed">
+            <span class="Futsal"><i class="fa-solid fa-trophy me-2 text-warning"></i>Futsal Registration</span>
+            <p class="sub-hed">Please enter your details below to ensure a smooth registration process</p>
+        </div>
+    </div>
+    
+    <div class="container">
+        <hr>
+    </div>
+
+    <div class="file">
+        <form  action="/register"   method="POST" enctype="multipart/form-data">
+            <!-- Player Name -->
+            <div class="mb-4">
+                <label class="form-label"><strong><i class="fa-solid fa-user me-2"></i>Player Name</strong></label>
+                <input type="text" name="playerName" class="form-control" id="playerName" placeholder="Enter your full name" required>
+            </div>
+
+            <!-- Batch No -->
+            <div class="mb-4">
+                <label class="form-label"><strong><i class="fa-solid fa-graduation-cap me-2"></i>Batch No</strong></label>
+                <select name="Batch" id="batch" required>
+                    <option value="" disabled selected>Select your batch</option>
+                    <option>1st</option>
+                    <option>2nd</option>
+                    <option>3rd</option>
+                    <option>4th</option>
+                    <option>6th</option>
+                    <option>7th</option>
+                    <option>8th</option>
+                    <option>9th</option>
+                    <option>10th</option>
+                    <option>11th</option>
+                    <option>12th</option>
+                </select>
+            </div>
+
+            <!-- Player Position -->
+            <div class="mb-4">
+                <label class="form-label"><strong><i class="fa-solid fa-star me-2"></i>Player Position</strong></label>
+                <select class="position" name="playerPosition" id="position" required>
+                    <option value="" disabled selected>Select your playing position</option>
+                    <option>GK (Goalkeeper)</option>
+                    <option>LB (Left Back)</option>
+                    <option>RB (Right Back)</option>
+                    <option>CB (Center Back)</option>
+                    <option>DMF (Defensive Midfielder)</option>
+                    <option>CMF (Central Midfielder)</option>
+                    <option>AMF (Attacking Midfielder)</option>
+                    <option>LMF (Left Midfielder)</option>
+                    <option>RMF (Right Midfielder)</option>
+                    <option>RWF (Right Wing Forward)</option>
+                    <option>LWF (Left Wing Forward)</option>
+                    <option>SS (Second Striker)</option>
+                    <option>CF (Center Forward)</option>
+                </select>
+            </div>
+
+            <!-- Phone Number -->
+            <div class="mb-4">
+                <label class="form-label"><strong><i class="fa-solid fa-phone me-2"></i>Phone Number</strong></label>
+                <input type="tel" name="phone" class="form-control" id="phoneNumber" placeholder="e.g. 017XXXXXXXX" required>
+            </div>
+
+            <!-- Photo Upload -->
+            <div class="mb-4">
+                <label class="form-label"><strong><i class="fa-solid fa-image me-2"></i>Player Photo</strong></label>
+                <input type="file" name="playerPhoto" class="form-control" id="photo" required>
+            </div>
+
+            <!-- Payment Section -->
+            <div class="payment-section mb-4">
+                <label class="form-label"><strong><i class="fa-solid fa-credit-card me-2"></i>Payment Method</strong></label>
+                <div class="payment-options">
+                    <div class="radio-wrapper">
+                        <input type="radio" id="Bkash" name="Payment_Method" value="Bkash" required>
+                        <label for="Bkash"><i class="fa-solid fa-wallet me-2 text-danger"></i>bKash (01315935911)</label>
+                    </div>
+                    <div class="radio-wrapper">
+                        <input type="radio" id="nagad" name="Payment_Method" value="Nagad" required>
+                        <label for="nagad"><i class="fa-solid fa-wallet me-2 text-warning"></i>Nagad (01315935911)</label>
+                    </div>
+                    <div class="radio-wrapper">
+                        <input type="radio" id="cash" name="Payment_Method" value="Cash" required>
+                        <label for="cash"><i class="fa-solid fa-money-bill-wave me-2 text-success"></i>Cash</label>
+                    </div>
+                </div>
+
+                <!-- Transaction ID -->
+                <div class="mt-4">
+                    <label class="form-label"><strong>Transaction ID / Reference Name</strong></label>
+                    <input type="text" class="form-control" name="transaction" id="transaction" placeholder="Enter Transaction ID or Reference Name" required>
+                </div>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" class="btn btn-submit"><i class="fa-solid fa-paper-plane me-2"></i>Submit Registration</button>
+        </form>
+    </div>
+    
+
+    <!-- Footer -->
+    <div class="botom">
+        &copy; 2026 Md Asif Hossain. All rights reserved.
+        <a href="/login" class="admin-link"><i class="fa-solid fa-lock me-1"></i>Admin Dashboard</a>
+    </div>
+
+    <!-- Bootstrap 5.3.2 JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+ 
+
+</body>
+</html>

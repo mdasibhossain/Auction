@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Team Budget Management</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; background-color: #0b1120; color: #e2e8f0; margin: 0; padding: 30px; }
+        .nav-link { color: #38bdf8; text-decoration: none; display: inline-block; margin-bottom: 20px; }
+        .budget-card { background: #1e293b; padding: 30px; border-radius: 12px; border: 1px solid #334155; max-width: 600px; margin-bottom: 40px; }
+        select, input { width: 100%; padding: 12px; margin: 10px 0; border-radius: 6px; border: 1px solid #334155; background: #0f172a; color: white; }
+        .save-btn { width: 100%; padding: 12px; background: #22c55e; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; }
+        
+        /* টেবিলের স্টাইল */
+        .team-container { background: #1e293b; padding: 25px; border-radius: 12px; border: 1px solid #334155; }
+        table { width: 100%; border-collapse: collapse; background: #0f172a; border-radius: 8px; overflow: hidden; }
+        th { text-align: left; padding: 15px; color: #38bdf8; border-bottom: 1px solid #334155; }
+        td { padding: 15px; border-bottom: 1px solid #334155; }
+    </style>
+</head>
+<body>
+    <a href="/dashboard" class="nav-link">← Back to Dashboard</a>
+    
+    <div class="budget-card">
+        <h1>Set Team Budget</h1>
+        <form action="/update-budget" method="POST">
+            <label>Select Team:</label>
+            <select name="teamId" required>{{TEAM_OPTIONS}}</select>
+            
+            <label>Maximum Budget:</label>
+            <input type="number" name="budget" placeholder="Enter Amount" required>
+            
+            <button type="submit" class="save-btn">Update Budget</button>
+        </form>
+    </div>
+
+    <div class="team-container">
+        <h1>Team Budget Summary</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Team Name</th>
+                    <th>Max Budget</th>
+                    <th>Remaining Budget</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{TEAM_SUMMARY_ROWS}}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
