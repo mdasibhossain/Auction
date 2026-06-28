@@ -4,10 +4,22 @@ const multer = require("multer");
 const Player = require("../model/player");
 const Team = require("../model/team");
 
-const uploadDir = path.join(__dirname, "..", "uploads");
+const resolveProjectPath = (...segments) => {
+    const candidates = [
+        path.resolve(__dirname, "..", ...segments),
+        path.resolve(process.cwd(), ...segments),
+        path.resolve(__dirname, ...segments)
+    ];
+
+    return candidates.find(candidate => fs.existsSync(candidate)) || candidates[0];
+};
+
+const uploadDir = resolveProjectPath("uploads");
 if (!fs.existsSync(uploadDir)) {
     fs.mkdirSync(uploadDir, { recursive: true });
 }
+
+const getViewPath = (...segments) => resolveProjectPath("views", ...segments);
 
 //Picture upload location
 const storage = multer.diskStorage({
@@ -23,10 +35,10 @@ exports.upload = multer({ storage: storage });
 
 
 exports.getHome = (req, res) => {
-    res.sendFile(path.join(__dirname, "..", "views", "Oction.html"));
+    res.sendFile(getViewPath("Oction.html"));
 };
 exports.getlogin = (req, res) => {
-    res.sendFile(path.join(__dirname, "..", "views", "AuctionUI.html"));
+    res.sendFile(getViewPath("AuctionUI.html"));
 };
 exports.getdashboard = async (req, res) => {
     try {
@@ -36,7 +48,7 @@ exports.getdashboard = async (req, res) => {
         const totalTeamsCount = await Team.countDocuments();
 
         
-        let htmlContent = fs.readFileSync(path.join(__dirname, "..", "views", "auctionPanel.html"), "utf-8");
+        let htmlContent = fs.readFileSync(getViewPath("auctionPanel.html"), "utf-8");
         htmlContent = htmlContent.replace("{{TOTAL_PLAYERS_COUNT}}", totalPlayersCount);
         htmlContent = htmlContent.replace("{{SOLD_PLAYERS_COUNT}}", soldPlayersCount);
         htmlContent = htmlContent.replace("{{UNSOLD_PLAYERS_COUNT}}", unsoldPlayersCount);
@@ -104,7 +116,7 @@ exports.getTotalPlayersPage = async (req, res) => {
         }
 
         const players = await Player.find(query);
-        let htmlContent = fs.readFileSync(path.join(__dirname, "..", "views", "totalPlayers.html"), "utf-8");// for html file read 
+        let htmlContent = fs.readFileSync(getViewPath("totalPlayers.html"), "utf-8");// for html file read 
         // for create a table
         let rows = "";
         players.forEach(player => {
@@ -147,7 +159,7 @@ exports.getLiveAuctionPage = async (req, res) => {
         const teams = await Team.find();
         let teamOptions = teams.map(t => `<option value="${t.teamName}">${t.teamName}</option>`).join("");
 
-        let htmlContent = fs.readFileSync(path.join(__dirname, "..", "views", "oction-card.html"), "utf-8");
+        let htmlContent = fs.readFileSync(getViewPath("oction-card.html"), "utf-8");
 
 
         if (!player) {
@@ -379,7 +391,7 @@ exports.postSetupTournament = async (req, res) => {
 exports.getTotalTeamsPage = async (req, res) => {
     try {
         const teams = await Team.find().populate('players');
-        let htmlContent = fs.readFileSync(path.join(__dirname, "..", "views", "totalTeams.html"), "utf-8");
+        let htmlContent = fs.readFileSync(getViewPath("totalTeams.html"), "utf-8");
 
         let allTeamsHtml = "";
 
@@ -459,7 +471,7 @@ exports.getTeamBudgetPage = async (req, res) => {
             </tr>
         `).join("");
 
-        let htmlContent = fs.readFileSync(path.join(__dirname, "..", "views", "teamBudget.html"), "utf-8");
+        let htmlContent = fs.readFileSync(getViewPath("teamBudget.html"), "utf-8");
         htmlContent = htmlContent.replace("{{TEAM_OPTIONS}}", teamOptions)
                                  .replace("{{TEAM_SUMMARY_ROWS}}", teamRows);
         

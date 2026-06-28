@@ -9,6 +9,9 @@ require('dotenv').config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+const projectRoot = path.resolve(__dirname);
+const viewsPath = path.join(projectRoot, "views");
+const uploadsPath = path.join(projectRoot, "uploads");
 
 // connect Database
 const connectDB = async () => {
@@ -34,11 +37,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 
-app.use("/uploads", express.static(path.join(__dirname, "uploads")));
-app.use(express.static(path.join(__dirname, "views")));
-
-
-
+app.use("/uploads", express.static(uploadsPath));
+app.use(express.static(viewsPath));
 
 
 app.use(auctionRoute);
