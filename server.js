@@ -5,7 +5,7 @@ const path = require("path");
 const auctionRoute = require("./routes/router");
 const Player = require("./model/player");
 const Team = require("./model/team");
-require('dotenv').config();
+ require('dotenv').config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -15,7 +15,8 @@ const uploadsPath = path.join(projectRoot, "uploads");
 
 // connect Database
 const connectDB = async () => {
-    const mongoUri = process.env.MONGODB_URI || process.env.MONGODB_URL;
+  console.log("Environment check:", process.env.MONGODB_URI);
+const mongoUri = process.env.MONGO_URI;
 
     if (!mongoUri) {
         console.warn("MONGODB_URI not set. Skipping database connection.");
