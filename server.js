@@ -8,20 +8,27 @@ const Team = require("./model/team");
 require('dotenv').config();
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 // connect Database
-const conectDB = async () => {
+const connectDB = async () => {
+    const mongoUri = process.env.MONGODB_URI || process.env.MONGODB_URL;
+
+    if (!mongoUri) {
+        console.warn("MONGODB_URI not set. Skipping database connection.");
+        return;
+    }
+
     try {
-        await mongoose.connect('mongodb://127.0.0.1:27017/futsalDB');
-        console.log("db is coneccted");
+        await mongoose.connect(mongoUri);
+        console.log("db is connected");
     } catch (error) {
         console.log("db is not connected");
         console.log(error.message);
-        process.exit(1);
     }
 };
-conectDB();
+connectDB();
+
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -36,6 +43,10 @@ app.use(express.static(path.join(__dirname, "views")));
 
 app.use(auctionRoute);
 
-app.listen(PORT, () => {
-    console.log(`server is runing http://localhost:${PORT}`);
-});
+if (require.main === module) {
+    app.listen(PORT, () => {
+        console.log(`server is runing http://localhost:${PORT}`);
+    });
+}
+
+module.exports = app;

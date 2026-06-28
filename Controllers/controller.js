@@ -4,10 +4,15 @@ const multer = require("multer");
 const Player = require("../model/player");
 const Team = require("../model/team");
 
+const uploadDir = path.join(__dirname, "..", "uploads");
+if (!fs.existsSync(uploadDir)) {
+    fs.mkdirSync(uploadDir, { recursive: true });
+}
+
 //Picture upload location
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, "uploads/");
+        cb(null, uploadDir);
     },
     filename: (req, file, cb) => {
         cb(null, Date.now() + path.extname(file.originalname));
@@ -18,7 +23,7 @@ exports.upload = multer({ storage: storage });
 
 
 exports.getHome = (req, res) => {
-    res.sendFile(path.join(__dirname, "..", "views", "oction.html"));
+    res.sendFile(path.join(__dirname, "..", "views", "Oction.html"));
 };
 exports.getlogin = (req, res) => {
     res.sendFile(path.join(__dirname, "..", "views", "AuctionUI.html"));
