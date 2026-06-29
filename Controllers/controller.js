@@ -3,6 +3,14 @@ const fs = require("fs");
 const multer = require("multer");
 const Player = require("../model/player");
 const Team = require("../model/team");
+const cloudinary = require('cloudinary').v2;
+const { CloudinaryStorage } = require('multer-storage-cloudinary');
+
+cloudinary.config({
+  cloud_name: process.env.CLOUD_NAME,
+  api_key: process.env.API_KEY,
+  api_secret: process.env.API_SECRET
+});
 
 const resolveProjectPath = (...segments) => {
     const candidates = [
@@ -22,14 +30,17 @@ if (!fs.existsSync(uploadDir)) {
 const getViewPath = (...segments) => resolveProjectPath("views", ...segments);
 
 //Picture upload location
-const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        cb(null, uploadDir);
-    },
-    filename: (req, file, cb) => {
-        cb(null, Date.now() + path.extname(file.originalname));
-    }
+// উপরের অংশগুলো ঠিক আছে, শুধু storage কনফিগারেশনটি এভাবে লিখুন:
+
+const storage = new CloudinaryStorage({
+  cloudinary: cloudinary,
+  params: {
+    folder: 'auction_players', // ক্লাউডিনারিতে যে ফোল্ডারে ছবি জমা হবে
+    format: async (req, file) => 'jpg', // বা আপনার পছন্দমতো ফরম্যাট
+    public_id: (req, file) => Date.now().toString() + '-' + file.originalname.split('.')[0],
+  },
 });
+
 exports.upload = multer({ storage: storage });
 
 
@@ -87,7 +98,7 @@ exports.postRegister = async (req, res) => {
             Batch: req.body.Batch,
             playerPosition: req.body.playerPosition,
             phone: req.body.phone,
-            playerPhoto: req.file ? req.file.filename : "",
+            playerPhoto: req.file ? req.file.path : "",
 
             Payment_Method: req.body.Payment_Method,
             transaction: req.body.transaction
