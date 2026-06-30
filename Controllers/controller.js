@@ -30,13 +30,13 @@ if (!fs.existsSync(uploadDir)) {
 const getViewPath = (...segments) => resolveProjectPath("views", ...segments);
 
 //Picture upload location
-// উপরের অংশগুলো ঠিক আছে, শুধু storage কনফিগারেশনটি এভাবে লিখুন:
+
 
 const storage = new CloudinaryStorage({
   cloudinary: cloudinary,
   params: {
-    folder: 'auction_players', // ক্লাউডিনারিতে যে ফোল্ডারে ছবি জমা হবে
-    format: async (req, file) => 'jpg', // বা আপনার পছন্দমতো ফরম্যাট
+    folder: 'auction_players',
+    format: async (req, file) => 'jpg', 
     public_id: (req, file) => Date.now().toString() + '-' + file.originalname.split('.')[0],
   },
 });
